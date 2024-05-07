@@ -430,6 +430,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ha4dd")
 
 [node name="Game" type="Node2D"]
+position = Vector2(33, -28)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_32r1s")
@@ -446,6 +447,7 @@ position = Vector2(-32, 23)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, 6)
+zoom = Vector2(3, 3)
 limit_left = -220
 limit_bottom = 120
 limit_smoothed = true

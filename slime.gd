@@ -21,7 +21,7 @@ func _physics_process(delta):
 	
 
 	var direction_to_player = (player.global_position - global_position).normalized()
-	print(direction_to_player.x)
+
 	if ray_cast_left.is_colliding() and direction_to_player.x < 0 and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	if ray_cast_right.is_colliding() and direction_to_player.x > 0 and is_on_floor():

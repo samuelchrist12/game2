@@ -3,9 +3,9 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 
 const SPEED = 100.0
-const JUMP_VELOCITY = -300.0
+var JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+var jump_limit = 2
 var is_rolling = false
 var roll_duration = 0.5  
 var roll_timer = 0.0
@@ -17,6 +17,8 @@ func _physics_process(delta):
 	var direction = Input.get_axis("walk_left", "walk_right")
 	
 	if is_on_floor() and not is_rolling:
+		jump_limit = 2
+		JUMP_VELOCITY = -300.0
 		if direction == 0:
 			animated_sprite.play("default")
 		else:
@@ -24,8 +26,11 @@ func _physics_process(delta):
 	elif not is_on_floor() and not is_rolling :
 		animated_sprite.play("jump")
 		
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and jump_limit != 0:
 		velocity.y = JUMP_VELOCITY
+		
+		jump_limit = jump_limit - 1
+		JUMP_VELOCITY = JUMP_VELOCITY + 50
 
 	if Input.is_action_just_pressed("roll") and not is_rolling:
 		start_roll()
