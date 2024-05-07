@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://6541w6bsgthv"]
+
+[ext_resource type="Texture2D" uid="uid://dptpigcn8x4ma" path="res://brackeys_platformer_assets/brackeys_platformer_assets/sprites/slime_green.png" id="1_ng33k"]
+[ext_resource type="Script" path="res://slime.gd" id="1_nku75"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpu5t"]
+atlas = ExtResource("1_ng33k")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytad1"]
+atlas = ExtResource("1_ng33k")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gug1a"]
+atlas = ExtResource("1_ng33k")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6s3m"]
+atlas = ExtResource("1_ng33k")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xkyjm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpu5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytad1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gug1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6s3m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o41qw"]
+radius = 6.08276
+
+[node name="slime" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_nku75")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xkyjm")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_o41qw")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, 9)
+target_position = Vector2(8, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, 9)
+target_position = Vector2(-8, 0)
